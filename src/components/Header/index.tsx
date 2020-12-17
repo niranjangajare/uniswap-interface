@@ -1,4 +1,4 @@
-import { ChainId, TokenAmount } from '@uniswap/sdk'
+import { ChainId /* , TokenAmount */ } from '@uniswap/sdk'
 import React, { useState } from 'react'
 import { Text } from 'rebass'
 import { NavLink } from 'react-router-dom'
@@ -7,29 +7,30 @@ import { useTranslation } from 'react-i18next'
 
 import styled from 'styled-components'
 
-import Logo from '../../assets/svg/logo.svg'
-import LogoDark from '../../assets/svg/logo_white.svg'
+// import Logo from '../../assets/svg/logo.svg'
+import Logo from '../../assets/images/logo.png'
+// import LogoDark from '../../assets/svg/logo_white.svg'
 import { useActiveWeb3React } from '../../hooks'
-import { useDarkModeManager } from '../../state/user/hooks'
-import { useETHBalances, useAggregateUniBalance } from '../../state/wallet/hooks'
-import { CardNoise } from '../earn/styled'
-import { CountUp } from 'use-count-up'
-import { TYPE /*, ExternalLink */ } from '../../theme'
+// import { useDarkModeManager } from '../../state/user/hooks'
+import { useETHBalances /* , useAggregateUniBalance */ } from '../../state/wallet/hooks'
+// import { CardNoise } from '../earn/styled'
+// import { CountUp } from 'use-count-up'
+// import { TYPE /* , ExternalLink */ } from '../../theme'
 
 import { YellowCard } from '../Card'
 import Settings from '../Settings'
 import Menu from '../Menu'
 
 import Row, { RowFixed } from '../Row'
-// import Web3Status from '../Web3Status'
+import Web3Status from '../Web3Status'
 import ClaimModal from '../claim/ClaimModal'
-import { useToggleSelfClaimModal, useShowClaimPopup } from '../../state/application/hooks'
-import { useUserHasAvailableClaim } from '../../state/claim/hooks'
-import { useUserHasSubmittedClaim } from '../../state/transactions/hooks'
-import { Dots } from '../swap/styleds'
+// import { useToggleSelfClaimModal, useShowClaimPopup } from '../../state/application/hooks'
+// import { useUserHasAvailableClaim } from '../../state/claim/hooks'
+// import { useUserHasSubmittedClaim } from '../../state/transactions/hooks'
+// import { Dots } from '../swap/styleds'
 import Modal from '../Modal'
 import UniBalanceContent from './UniBalanceContent'
-import usePrevious from '../../hooks/usePrevious'
+// import usePrevious from '../../hooks/usePrevious'
 
 const HeaderFrame = styled.div`
   display: grid;
@@ -44,6 +45,7 @@ const HeaderFrame = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 1rem;
   z-index: 2;
+  background-color: white;
   ${({ theme }) => theme.mediaWidth.upToMedium`
     grid-template-columns: 1fr;
     padding: 0 1rem;
@@ -125,28 +127,28 @@ const AccountElement = styled.div<{ active: boolean }>`
   }
 `
 
-const UNIAmount = styled(AccountElement)`
-  color: white;
-  padding: 4px 8px;
-  height: 36px;
-  font-weight: 500;
-  background-color: ${({ theme }) => theme.bg3};
-  background: radial-gradient(174.47% 188.91% at 1.84% 0%, #ff007a 0%, #2172e5 100%), #edeef2;
-`
+// const UNIAmount = styled(AccountElement)`
+//   color: white;
+//   padding: 4px 8px;
+//   height: 36px;
+//   font-weight: 500;
+//   background-color: ${({ theme }) => theme.bg3};
+//   background: radial-gradient(174.47% 188.91% at 1.84% 0%, #ff007a 0%, #2172e5 100%), #edeef2;
+// `
 
-const UNIWrapper = styled.span`
-  width: fit-content;
-  position: relative;
-  cursor: pointer;
+// const UNIWrapper = styled.span`
+//   width: fit-content;
+//   position: relative;
+//   cursor: pointer;
 
-  :hover {
-    opacity: 0.8;
-  }
+//   :hover {
+//     opacity: 0.8;
+//   }
 
-  :active {
-    opacity: 0.9;
-  }
-`
+//   :active {
+//     opacity: 0.9;
+//   }
+// `
 
 const HideSmall = styled.span`
   ${({ theme }) => theme.mediaWidth.upToSmall`
@@ -266,21 +268,21 @@ export default function Header() {
   const { t } = useTranslation()
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
-  const [isDark] = useDarkModeManager()
+  // const [isDark] = useDarkModeManager()
 
-  const toggleClaimModal = useToggleSelfClaimModal()
+  // const toggleClaimModal = useToggleSelfClaimModal()
 
-  const availableClaim: boolean = useUserHasAvailableClaim(account)
+  // const availableClaim: boolean = useUserHasAvailableClaim(account)
 
-  const { claimTxn } = useUserHasSubmittedClaim(account ?? undefined)
+  // const { claimTxn } = useUserHasSubmittedClaim(account ?? undefined)
 
-  const aggregateBalance: TokenAmount | undefined = useAggregateUniBalance()
+  // const aggregateBalance: TokenAmount | undefined = useAggregateUniBalance()
 
   const [showUniBalanceModal, setShowUniBalanceModal] = useState(false)
-  const showClaimPopup = useShowClaimPopup()
+  // const showClaimPopup = useShowClaimPopup()
 
-  const countUpValue = aggregateBalance?.toFixed(0) ?? '0'
-  const countUpValuePrevious = usePrevious(countUpValue) ?? '0'
+  // const countUpValue = aggregateBalance?.toFixed(0) ?? '0'
+  // const countUpValuePrevious = usePrevious(countUpValue) ?? '0'
 
   return (
     <HeaderFrame>
@@ -291,7 +293,8 @@ export default function Header() {
       <HeaderRow>
         <Title href=".">
           <UniIcon>
-            <img width={'24px'} src={isDark ? LogoDark : Logo} alt="logo" />
+            {/* <img width={'24px'} src={isDark ? LogoDark : Logo} alt="logo" /> */}
+            <img width={'36px'} src={Logo} alt="logo" />
           </UniIcon>
         </Title>
         <HeaderLinks>
@@ -329,7 +332,7 @@ export default function Header() {
               <NetworkCard title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</NetworkCard>
             )}
           </HideSmall>
-          {availableClaim && !showClaimPopup && (
+          {/* {availableClaim && !showClaimPopup && (
             <UNIWrapper onClick={toggleClaimModal}>
               <UNIAmount active={!!account && !availableClaim} style={{ pointerEvents: 'auto' }}>
                 <TYPE.white padding="0 2px">
@@ -364,14 +367,14 @@ export default function Header() {
               </UNIAmount>
               <CardNoise />
             </UNIWrapper>
-          )}
+          )} */}
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                 {userEthBalance?.toSignificant(4)} ETH
               </BalanceText>
             ) : null}
-            {/* <Web3Status /> */}
+            <Web3Status />
           </AccountElement>
         </HeaderElement>
         <HeaderElementWrap>
