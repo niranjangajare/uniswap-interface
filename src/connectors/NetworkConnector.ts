@@ -59,7 +59,7 @@ class MiniRpcProvider implements AsyncSendable {
     try {
       response = await fetch(this.url, {
         method: 'POST',
-        headers: { 'content-type': 'application/json', accept: 'application/json' },
+        headers: { 'content-type': 'application/json' },
         body: JSON.stringify(batch.map(item => item.request))
       })
     } catch (error) {
