@@ -9,7 +9,7 @@ import { useUserHasLiquidityInAllTokens } from '../../data/V1'
 import { useTokenBalancesWithLoadingIndicator } from '../../state/wallet/hooks'
 import { StyledInternalLink, ExternalLink, TYPE, HideSmall } from '../../theme'
 import { Text } from 'rebass'
-import Card from '../../components/Card'
+import { OutlineCard } from '../../components/Card'
 import { RowBetween, RowFixed } from '../../components/Row'
 import { ButtonPrimary, ButtonSecondary } from '../../components/Button'
 import { AutoColumn } from '../../components/Column'
@@ -59,6 +59,7 @@ const ResponsiveButtonPrimary = styled(ButtonPrimary)`
 
 const ResponsiveButtonSecondary = styled(ButtonSecondary)`
   width: fit-content;
+  color: ${({ theme }) => theme.white};
   ${({ theme }) => theme.mediaWidth.upToSmall`
     width: 48%;
   `};
@@ -140,13 +141,13 @@ export default function Pool() {
                   {`Liquidity providers earn a 0.3% fee on all trades proportional to their share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity.`}
                 </TYPE.white>
               </RowBetween>
-              <ExternalLink
+              {/* <ExternalLink
                 style={{ color: 'white', textDecoration: 'underline' }}
                 target="_blank"
                 href="https://uniswap.org/docs/v2/core-concepts/pools/"
               >
                 <TYPE.white fontSize={14}>Read more about providing liquidity</TYPE.white>
-              </ExternalLink>
+              </ExternalLink> */}
             </AutoColumn>
           </CardSection>
           <CardBGImage />
@@ -174,14 +175,14 @@ export default function Pool() {
             </TitleRow>
 
             {!account ? (
-              <Card padding="40px">
-                <TYPE.body color={theme.text3} textAlign="center">
+              <OutlineCard padding="40px">
+                <TYPE.body color={theme.text1} textAlign="center">
                   Connect to a wallet to view your liquidity.
                 </TYPE.body>
-              </Card>
+              </OutlineCard>
             ) : v2IsLoading ? (
               <EmptyProposals>
-                <TYPE.body color={theme.text3} textAlign="center">
+                <TYPE.body color={theme.text1} textAlign="center">
                   <Dots>Loading</Dots>
                 </TYPE.body>
               </EmptyProposals>
@@ -211,7 +212,7 @@ export default function Pool() {
               </>
             ) : (
               <EmptyProposals>
-                <TYPE.body color={theme.text3} textAlign="center">
+                <TYPE.body color={theme.text1} textAlign="center">
                   No liquidity found.
                 </TYPE.body>
               </EmptyProposals>

@@ -25,7 +25,8 @@ let networkLibrary: Web3Provider | undefined
 export function getNetworkLibrary(): Web3Provider {
   return (networkLibrary = networkLibrary ?? new Web3Provider(network.provider as any))
 }
-
+// below code is used for Metamask Wallet.
+// const Metamask_Token = 0x2d6b7E4c9e8FCd5A651aC4ae501804DC32177beB;
 export const injected = new InjectedConnector({
   supportedChainIds: [1, 3, 4, 5, 42]
 })
