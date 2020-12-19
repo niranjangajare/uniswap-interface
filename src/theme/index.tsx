@@ -53,6 +53,11 @@ export function colors(darkMode: boolean): Colors {
     bg3: darkMode ? '#40444F' : '#EDEEF2',
     bg4: darkMode ? '#565A69' : '#CED0D9',
     bg5: darkMode ? '#6C7284' : '#888D9B',
+    bodyBg: darkMode
+      ? `radial-gradient(50% 50% at 50% 50%, ${transparentize(0.9, '#2172E5')} 0%, 
+      ${transparentize(1, '#212429')} 100%)`
+      : '#FFA500',
+    headerBg: darkMode ? 'transparent' : white,
 
     //specialty colors
     modalBG: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
@@ -234,9 +239,6 @@ body {
   min-height: 100vh;
   background-position: 0 -30vh;
   background-repeat: no-repeat;
-  background-color: ${({ theme }) => theme.primary1};
-  /* background-image: ${({ theme }) =>
-    `radial-gradient(50% 50% at 50% 50%, ${transparentize(0.9, theme.primary1)} 0%, 
-    ${transparentize(1, theme.bg1)} 100%)`}; */
+  background: ${({ theme }) => theme.bodyBg};
 }
 `
